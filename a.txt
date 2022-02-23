@@ -1,0 +1,7 @@
+Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string.
+Create a new start tag token, set its tag name to the empty string. Reconsume in the tag-name state.
+Start a new attribute in the current tag token. Set that attribute name and value to the empty string.
+Create a new DOCTYPE token. Set the token's name to a U+FFFD REPLACEMENT-CHARACTER character.
+
+
+Emit U+003C LESS-THAN SIGN character token, U+002F SOLIDUS character token and end-of-file token.

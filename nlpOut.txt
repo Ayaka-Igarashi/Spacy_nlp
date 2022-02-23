@@ -1,0 +1,1584 @@
+name:Data_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0026 AMPERSAND (&amp;)
+(S (VP (VB Set) (NP (DT the) (NN return) (NN state)) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Character_reference_state)))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Tag_open_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:RCDATA_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0026 AMPERSAND (&amp;)
+(S (VP (VB Set) (NP (DT the) (NN return) (NN state)) (PP (IN to) (NP (DT the) (NN RCDATA_state)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Character_reference_state)))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN RCDATA_less_than_sign_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:RAWTEXT_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN RAWTEXT_less_than_sign_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_less_than_sign_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:PLAINTEXT_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0021 EXCLAMATION MARK (!)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Markup_declaration_open_state)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN End_tag_open_state)))) (. .))
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NN start) (NN tag) (NN token))) (CC and) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Tag_name_state)))) (. .))
+char:U+003F QUESTION MARK (?)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-question-mark-instead-of-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (NP (DT a) (NN comment) (NN token)) (SBAR (WHNP (WP$ whose) (NNS data)) (S (VP (VBZ is) (NP (DT the) (JJ empty) (NN string))))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_comment_state)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-before-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (NP (NP (DT a) (NNP U+003C)) (PP (PP (IN LESS-THAN) (S (VP (JJ SIGN)))) (NN character) (NN token))) (CC and) (NP (DT an) (NN end-of-file) (NN token)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN invalid-first-character-of-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Data_state)))) (. .))
+
+name:End_tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NML (NN end) (NN tag)) (NN token))) (, ,) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Tag_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-end-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-before-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (IN LESS-THAN) (JJ SIGN) (NN character) (NN token)) (, ,) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)) (CC and) (NP (DT an) (NN end-of-file) (NN token)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN invalid-first-character-of-tag-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (NP (DT a) (NN comment) (NN token)) (SBAR (WHNP (WP$ whose) (NNS data)) (S (VP (VBZ is) (NP (DT the) (JJ empty) (NN string))))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_comment_state)))) (. .))
+
+name:Tag_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+
+name:RCDATA_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002F SOLIDUS (/)
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN RCDATA_end_tag_open_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RCDATA_state)))) (. .))
+
+name:RCDATA_end_tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NML (NN end) (NN tag)) (NN token))) (, ,) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RCDATA_end_tag_name_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (UCP (NNP U+003C) (NNP LESS-THAN)) (JJ SIGN) (NN character) (NN token)) (CC and) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RCDATA_state)))) (. .))
+
+name:RCDATA_end_tag_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NN end) (NN tag) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VP (VB switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (CC and) (VP (VB emit) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (PP (IN LESS-THAN) (JJ SIGN)) (NN character) (NN token)) (, ,) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)) (, ,) (CC and) (NP (NP (NP (DT a) (NN character) (NN token)) (PP (IN for) (NP (NP (DT each)) (PP (IN of) (NP (NP (DT the) (NNS characters)) (PP (IN in) (NP (DT the) (JJ temporary) (NN buffer)))))))) (-LRB- -LRB-) (PP (IN in) (NP (NP (DT the) (NN order)) (SBAR (S (NP (PRP they)) (VP (VBD were) (VP (VBN added) (PP (IN to) (NP (DT the) (NN buffer))))))))) (-RRB- -RRB-)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RCDATA_state)))) (. .))
+
+name:RAWTEXT_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002F SOLIDUS (/)
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN RAWTEXT_end_tag_open_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RAWTEXT_state)))) (. .))
+
+name:RAWTEXT_end_tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NML (NN end) (NN tag)) (NN token))) (, ,) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RAWTEXT_end_tag_name_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (UCP (NNP U+003C) (NNP LESS-THAN)) (JJ SIGN) (NN character) (NN token)) (CC and) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RAWTEXT_state)))) (. .))
+
+name:RAWTEXT_end_tag_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NN end) (NN tag) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VP (VB switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (CC and) (VP (VB emit) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (PP (IN LESS-THAN) (JJ SIGN)) (NN character) (NN token)) (, ,) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)) (, ,) (CC and) (NP (NP (NP (DT a) (NN character) (NN token)) (PP (IN for) (NP (NP (DT each)) (PP (IN of) (NP (NP (DT the) (NNS characters)) (PP (IN in) (NP (DT the) (JJ temporary) (NN buffer)))))))) (-LRB- -LRB-) (PP (IN in) (NP (NP (DT the) (NN order)) (SBAR (S (NP (PRP they)) (VP (VBD were) (VP (VBN added) (PP (IN to) (NP (DT the) (NN buffer))))))))) (-RRB- -RRB-)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN RAWTEXT_state)))) (. .))
+
+name:Script_data_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002F SOLIDUS (/)
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_end_tag_open_state)))) (. .))
+char:U+0021 EXCLAMATION MARK (!)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escape_start_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (IN LESS-THAN) (JJ SIGN) (NN character) (NN token)) (CC and) (NP (DT a) (NNP U+0021) (NML (NNP EXCLAMATION) (NNP MARK)) (NN character) (NN token)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_state)))) (. .))
+
+name:Script_data_end_tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NML (NN end) (NN tag)) (NN token))) (, ,) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_end_tag_name_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (UCP (NNP U+003C) (NNP LESS-THAN)) (JJ SIGN) (NN character) (NN token)) (CC and) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_state)))) (. .))
+
+name:Script_data_end_tag_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NN end) (NN tag) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VP (VB switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (CC and) (VP (VB emit) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (PP (IN LESS-THAN) (JJ SIGN)) (NN character) (NN token)) (, ,) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)) (, ,) (CC and) (NP (NP (NP (DT a) (NN character) (NN token)) (PP (IN for) (NP (NP (DT each)) (PP (IN of) (NP (NP (DT the) (NNS characters)) (PP (IN in) (NP (DT the) (JJ temporary) (NN buffer)))))))) (-LRB- -LRB-) (PP (IN in) (NP (NP (DT the) (NN order)) (SBAR (S (NP (PRP they)) (VP (VBD were) (VP (VBN added) (PP (IN to) (NP (DT the) (NN buffer))))))))) (-RRB- -RRB-)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_state)))) (. .))
+
+name:Script_data_escape_start_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escape_start_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_state)))) (. .))
+
+name:Script_data_escape_start_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_dash_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_state)))) (. .))
+
+name:Script_data_escaped_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_less_than_sign_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_escaped_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_dash_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_less_than_sign_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_escaped_dash_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_less_than_sign_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003E)) (PP (IN GREATER-THAN) (JJ SIGN)) (NN character) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_escaped_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002F SOLIDUS (/)
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_end_tag_open_state)))) (. .))
+char:ASCII alpha
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_double_escape_start_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+
+name:Script_data_escaped_end_tag_open_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alpha
+(S (VP (VP (VB Create) (NP (DT a) (JJ new) (NML (NN end) (NN tag)) (NN token))) (, ,) (VP (VB set) (NP (PRP$ its) (NN tag) (NN name)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_escaped_end_tag_name_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (UCP (NNP U+003C) (NNP LESS-THAN)) (JJ SIGN) (NN character) (NN token)) (CC and) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+
+name:Script_data_escaped_end_tag_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NN end) (NN tag) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ current) (NML (NN end) (NN tag)) (NN token)) (VP (VBZ is) (NP (DT an) (JJ appropriate) (NML (NN end) (NN tag)) (NN token))))) (, ,) (ADVP (RB then)) (VP (VP (VB switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (CC and) (VP (VB emit) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN tag) (NN token) (POS 's)) (NN tag) (NN name)))) (. .))
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C) (PP (IN LESS-THAN) (JJ SIGN)) (NN character) (NN token)) (, ,) (NP (DT a) (NNP U+002F) (NNP SOLIDUS) (NN character) (NN token)) (, ,) (CC and) (NP (NP (NP (DT a) (NN character) (NN token)) (PP (IN for) (NP (NP (DT each)) (PP (IN of) (NP (NP (DT the) (NNS characters)) (PP (IN in) (NP (DT the) (JJ temporary) (NN buffer)))))))) (-LRB-  ) (-LRB- -LRB-) (PP (IN in) (NP (NP (DT the) (NN order)) (SBAR (S (NP (PRP they)) (VP (VBD were) (VP (VBN added) (PP (IN to) (NP (DT the) (NN buffer))))))))) (-RRB- -RRB-)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+
+name:Script_data_double_escape_start_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:ASCII upper alpha
+(S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+
+name:Script_data_double_escaped_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_less_than_sign_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_double_escaped_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_dash_dash_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_less_than_sign_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_double_escaped_dash_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character) (NN token))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_less_than_sign_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003C)) (PP (IN LESS-THAN) (VB SIGN)) (NN character) (NN token))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_state)))) (. .))
+(S (VP (VB Emit) (NP (NP (DT a) (NNP U+003E)) (PP (IN GREATER-THAN) (JJ SIGN)) (NN character) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-script-html-comment-like-text) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:Script_data_double_escaped_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002F SOLIDUS (/)
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escape_end_state)))) (. .))
+(S (VP (VB Emit) (NP (DT a) (NML (NNP U+002F) (NNP SOLIDUS)) (NN character) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+
+name:Script_data_double_escape_end_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+0020 SPACE
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (SBAR (IN If) (S (NP (DT the) (JJ temporary) (NN buffer)) (VP (VBZ is) (NP (DT the) (NN string) (NN "script"))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_escaped_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:ASCII upper alpha
+(S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:ASCII lower alpha
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Script_data_double_escaped_state)))) (. .))
+
+name:Before_attribute_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:EOF
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+003D EQUALS SIGN (=)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-equals-sign-before-attribute-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Start) (NP (DT a) (JJ new) (NN attribute)) (PP (IN in) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT that) (NN attribute) (POS 's)) (NN name)) (PP (IN to) (NP (DT the) (JJ current) (JJ input) (NN character)))) (, ,) (CC and) (VP (NP (PRP$ its) (NN value)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Attribute_name_state)))) (. .))
+char:Anything else
+(S (VP (VB Start) (NP (DT a) (JJ new) (NN attribute)) (PP (IN in) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (VP (VB Set) (NP (DT that) (NN attribute) (NN name) (CC and) (NN value)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Attribute_name_state)))) (. .))
+
+name:Attribute_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:EOF
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN After_attribute_name_state)))) (. .))
+char:U+003D EQUALS SIGN (=)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_value_state)))) (. .))
+char:ASCII upper alpha
+(S (VP (S (VP (VB Append) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN name)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN name)))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-attribute-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-attribute-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-attribute-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN name)))) (. .))
+
+name:After_attribute_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+char:U+003D EQUALS SIGN (=)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_value_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Start) (NP (DT a) (JJ new) (NN attribute)) (PP (IN in) (NP (DT the) (JJ current) (NN tag) (NN token)))) (. .))
+(S (VP (VB Set) (NP (DT that) (NN attribute) (NN name) (CC and) (NN value)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Attribute_name_state)))) (. .))
+
+name:Before_attribute_value_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Attribute_value_double_quoted_state)))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Attribute_value_single_quoted_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Attribute_value_unquoted_state)))) (. .))
+
+name:Attribute_value_double_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0022 QUOTATION MARK (")
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_attribute_value_quoted_state)))) (. .))
+char:U+0026 AMPERSAND (&amp;)
+(S (VP (VB Set) (NP (DT the) (NN return) (NN state)) (PP (IN to) (NP (DT the) (NN Attribute_value_double_quoted_state)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Character_reference_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+
+name:Attribute_value_single_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0027 APOSTROPHE (')
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_attribute_value_quoted_state)))) (. .))
+char:U+0026 AMPERSAND (&amp;)
+(S (VP (VB Set) (NP (DT the) (NN return) (NN state)) (PP (IN to) (NP (DT the) (NN Attribute_value_single_quoted_state)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Character_reference_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+
+name:Attribute_value_unquoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+0026 AMPERSAND (&amp;)
+(S (VP (VB Set) (NP (DT the) (NN return) (NN state)) (PP (IN to) (NP (DT the) (NN Attribute_value_unquoted_state)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Character_reference_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-unquoted-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-unquoted-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-unquoted-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+003D EQUALS SIGN (=)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-unquoted-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:U+0060 GRAVE ACCENT (`)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-in-unquoted-attribute-value) (NN parse) (NN error))) (. .))
+(S (VP (VB Treat) (NP (PRP it)) (PP (IN as) (PP (IN per) (NP (NP (DT the) (`` ") (NML (NN anything) (RB else)) ('' ") (NN entry)) (ADVP (RB below)))))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+
+name:After_attribute_value_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+char:U+002F SOLIDUS (/)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Self_closing_start_tag_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NNS missing-whitespace-between-attributes) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+
+name:Self_closing_start_tag_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Set) (NP (NP (DT the) (VBG self-closing) (NN flag)) (PP (IN of) (NP (DT the) (JJ current) (NN tag) (NN token))))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN tag) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-solidus-in-tag) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Before_attribute_name_state)))) (. .))
+
+name:Bogus_comment_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT the) (NN comment))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+
+name:Markup_declaration_open_state
+prev:
+(SBAR (IN If) (S (NP (DT the) (JJ next) (JJ few) (NNS characters)) (VP (VBP are))) (: :))
+trans:
+char:Two U+002D HYPHEN-MINUS characters (-)
+(S (VP (VP (VB Consume) (NP (DT those) (CD two) (NNS characters))) (, ,) (VP (VB create) (NP (NP (DT a) (NN comment) (NN token)) (SBAR (WHNP (WP$ whose) (NNS data)) (S (VP (VBZ is) (NP (DT the) (JJ empty) (NN string))))))) (, ,) (CC and) (VP (VB switch) (PP (IN to) (NP (DT the) (NN Comment_start_state))))) (. .))
+char:ASCII case-insensitive match for the word "DOCTYPE"
+(S (VP (VP (VB Consume) (NP (DT those) (NNS characters))) (CC and) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_state))))) (. .))
+char:The string "[CDATA[" (the five uppercase letters "CDATA" with a U+005B LEFT SQUARE BRACKET character before and after)
+(S (VP (VB Consume) (NP (DT those) (NNS characters))) (. .))
+(S (SBAR (IN If) (S (S (NP (EX there)) (VP (VBZ is) (NP (DT an) (VBN adjusted) (JJ current) (NN node)))) (CC and) (S (NP (PRP it)) (VP (VBZ is) (RB not) (NP (NP (DT an) (NN element)) (PP (IN in) (NP (DT the) (NNP HTML) (NN namespace)))))))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN CDATA_section_state)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (NP (DT this)) (VP (VBZ is) (NP (DT a) (NN cdata-in-html-content) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (NP (DT a) (NN comment) (NN token)) (SBAR (WHNP (WP$ whose) (NNS data)) (S (VP (VBZ is) (NP (DT the) (`` ") (`` -LSB-) (NN CDATA) (SYM -LSB-) ('' ") (NN string))))))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Bogus_comment_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN incorrectly-opened-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (NP (DT a) (NN comment) (NN token)) (SBAR (WHNP (WP$ whose) (NNS data)) (S (VP (VBZ is) (NP (DT the) (JJ empty) (NN string))))))) (. .))
+(S (VP (S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Bogus_comment_state))))) (PRN (-LRB- -LRB-) (S (VP (VBP do) (RB n't) (VP (VB consume) (NP (NN anything)) (PP (IN in) (NP (DT the) (JJ current) (NN state)))))) (-RRB- -RRB-))) (. .))
+
+name:Comment_start_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_start_dash_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-closing-of-empty-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_start_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_end_state)))))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-closing-of-empty-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character)) (-LRB- -LRB-) (NP (HYPH -)) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_less_than_sign_state)))) (. .))
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_end_dash_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+
+name:Comment_less_than_sign_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0021 EXCLAMATION MARK (!)
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_less_than_sign_bang_state)))) (. .))
+char:U+003C LESS-THAN SIGN (&lt;)
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_less_than_sign_bang_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_less_than_sign_bang_dash_state)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_less_than_sign_bang_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_less_than_sign_bang_dash_dash_state)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_end_dash_state)))) (. .))
+
+name:Comment_less_than_sign_bang_dash_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_end_state)))) (. .))
+char:EOF
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_end_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN nested-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_end_state)))) (. .))
+
+name:Comment_end_dash_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_end_state)))))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (NP (DT a) (NML (NNP U+002D) (NNP HYPHEN-MINUS)) (NN character)) (-LRB- -LRB-) (NP (HYPH -)) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_end_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+char:U+0021 EXCLAMATION MARK (!)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_end_bang_state)))) (. .))
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Append) (NP (NP (DT a) (NNP U+002D) (NNP HYPHEN-MINUS) (NN character)) (-LRB- -LRB-) (NP (HYPH -)) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (NP (CD two) (NNP U+002D) (NNP HYPHEN-MINUS) (NNS characters)) (-LRB- -LRB-) (NP (HYPH -)) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:Comment_end_bang_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+002D HYPHEN-MINUS (-)
+(S (VP (VB Append) (NP (NP (NP (CD two) (NNP U+002D) (NNP HYPHEN-MINUS) (NNS characters)) (-LRB- -LRB-) (NP (HYPH -)) (-RRB- -RRB-)) (CC and) (NP (NP (DT a) (CD U+0021) (NML (NNP EXCLAMATION) (NNP MARK)) (NN character)) (-LRB- -LRB-) (HYPH -EXC-) (-RRB- -RRB-))) (PP (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Comment_end_dash_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN incorrectly-closed-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-comment) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN comment) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(VP (VB Append) (NP (NP (NP (NP (CD two) (NNP U+002D) (NNP HYPHEN-MINUS) (NNS characters)) (-LRB- -LRB-) (HYPH -) (-RRB- -RRB-)) (CC and) (NP (NP (DT a) (CD U+0021) (NML (NNP EXCLAMATION) (NNP MARK)) (NN character)) (-LRB- -LRB-) (-RRB- !))) (. -RRB-)))
+(FRAG (IN to) (NP (NP (DT the) (NN comment) (NN token) (POS 's)) (NNS data)) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Comment_state)))) (. .))
+
+name:DOCTYPE_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (VP (VB Set) (NP (PRP$ its) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-whitespace-before-doctype-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Before_DOCTYPE_name_state)))) (. .))
+
+name:Before_DOCTYPE_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:ASCII upper alpha
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (S (VP (VB Set) (NP (NP (DT the) (NN token) (POS 's)) (NN name)) (PP (IN to) (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character))))))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_name_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NN token) (POS 's)) (NN name)) (PP (IN to) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-doctype-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (VP (VB Set) (NP (PRP$ its) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (VP (VB Set) (NP (PRP$ its) (NML (NN  ) (NNS force-quirks)) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Create) (NP (DT a) (JJ new) (NNP DOCTYPE) (NN token))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NN token) (POS 's)) (NN name)) (PP (IN to) (NP (DT the) (JJ current) (NN input) (NN character)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_name_state)))) (. .))
+
+name:DOCTYPE_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_name_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_name_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_name_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_name_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token))) (. .))
+char:ASCII upper alpha
+(S (VP (VB Append) (NP (NP (NP (DT the) (JJ lowercase) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))) (PRN (-LRB- -LRB-) (S (VP (VB add) (NP (CD 0x0020)) (PP (IN to) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-))) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN name)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN name)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN name)))) (. .))
+
+name:After_DOCTYPE_name_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (SBAR (IN If) (S (NP (NP (DT the) (CD six) (NNS characters)) (VP (VBG starting) (PP (IN from) (NP (DT the) (JJ current) (NN input) (NN character))))) (VP (VBP are) (NP (NP (DT an) (NNP ASCII) (JJ case-insensitive) (NN match)) (PP (IN for) (NP (DT the) (NN word) (`` ") (NNP PUBLIC))))))) (, ") ('' ,) (ADVP (RB then)) (VP (VP (VB consume) (NP (DT those) (NNS characters))) (CC and) (VP (VB switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_public_keyword_state))))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (SBAR (SBAR (IN if) (S (NP (NP (DT the) (CD six) (NNS characters)) (VP (VBG starting) (PP (IN from) (NP (DT the) (JJ current) (NN input) (NN character))))) (VP (VBP are) (NP (NP (DT an) (NNP ASCII) (JJ case-insensitive) (NN match)) (PP (IN for) (NP (DT the) (NN word) (`` ") (NN SYSTEM))))))) (, ")) (, ,) (ADVP (RB then)) (VP (VP (VB consume) (NP (DT those) (NNS characters))) (CC and) (VP (VB switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_system_keyword_state))))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (NP (DT this)) (VP (VBZ is) (NP (DT an) (NN invalid-character-sequence-after-doctype-name) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:After_DOCTYPE_public_keyword_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_public_identifier_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_public_identifier_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_public_identifier_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_public_identifier_state)))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-whitespace-after-doctype-public-keyword) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_public_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-whitespace-after-doctype-public-keyword) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_public_identifier_single_quoted_state))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:Before_DOCTYPE_public_identifier_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_public_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_public_identifier_single_quoted_state))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:DOCTYPE_public_identifier_double_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0022 QUOTATION MARK (")
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_public_identifier_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)))) (. .))
+
+name:DOCTYPE_public_identifier_single_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0027 APOSTROPHE (')
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_public_identifier_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-doctype-public-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (JJ public) (NN identifier)))) (. .))
+
+name:After_DOCTYPE_public_identifier_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Between_DOCTYPE_public_and_system_identifiers_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Between_DOCTYPE_public_and_system_identifiers_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Between_DOCTYPE_public_and_system_identifiers_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Between_DOCTYPE_public_and_system_identifiers_state)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NML (NNS missing-whitespace-between-doctype-public-and-system-identifiers)) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NML (NNS missing-whitespace-between-doctype-public-and-system-identifiers)) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_single_quoted_state))))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:Between_DOCTYPE_public_and_system_identifiers_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_single_quoted_state))))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:After_DOCTYPE_system_keyword_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_system_identifier_state)))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_system_identifier_state)))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_system_identifier_state)))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Before_DOCTYPE_system_identifier_state)))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-whitespace-after-doctype-system-keyword) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-whitespace-after-doctype-system-keyword) (NN parse) (NN error))) (. .))
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_single_quoted_state))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:Before_DOCTYPE_system_identifier_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0022 QUOTATION MARK (")
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_double_quoted_state))))) (. .))
+char:U+0027 APOSTROPHE (')
+(S (VP (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)) (PP (IN to) (NP (NP (DT the) (JJ empty) (NN string)) (-LRB- -LRB-) (ADJP (RB not) (VBG missing)) (-RRB- -RRB-)))) (, ,) (ADVP (RB then)) (VP (VB switch) (PP (IN to) (NP (DT the) (NN DOCTYPE_system_identifier_single_quoted_state))))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN missing-quote-before-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+
+name:DOCTYPE_system_identifier_double_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0022 QUOTATION MARK (")
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_system_identifier_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)))) (. .))
+
+name:DOCTYPE_system_identifier_single_quoted_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0027 APOSTROPHE (')
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN After_DOCTYPE_system_identifier_state)))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Append) (NP (DT a) (NML (NNP U+FFFD) (NNP REPLACEMENT) (NNP CHARACTER)) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN abrupt-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token) (POS 's)) (NN system) (NN identifier)))) (. .))
+
+name:After_DOCTYPE_system_identifier_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+0009 CHARACTER TABULATION (tab)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000A LINE FEED (LF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+000C FORM FEED (FF)
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+0020 SPACE
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NNP DOCTYPE) (NN token))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-doctype) (NN parse) (NN error))) (. .))
+(S (VP (VB Set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on)))) (. .))
+(S (VP (VB Emit) (NP (DT that) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-character-after-doctype-system-identifier) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Bogus_DOCTYPE_state)))) (. .))
+(S (-LRB- -LRB-) (NP (DT This)) (VP (VBZ does) (RB not) (VP (VB set) (NP (NP (DT the) (NNP DOCTYPE) (NN token) (POS 's)) (NNS force-quirks) (NN flag)) (PP (IN to) (ADVP (RP on))))) (. .) (-RRB- -RRB-))
+
+name:Bogus_DOCTYPE_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+003E GREATER-THAN SIGN (&gt;)
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+(S (VP (VB Emit) (NP (DT the) (NN DOCTYPE) (NN token))) (. .))
+char:U+0000 NULL
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unexpected-null-character) (NN parse) (NN error))) (. .))
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+char:EOF
+(S (VP (VB Emit) (NP (DT the) (NN DOCTYPE) (NN token))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Ignore) (NP (DT the) (NN character))) (. .))
+
+name:CDATA_section_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+005D RIGHT SQUARE BRACKET (])
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN CDATA_section_bracket_state)))) (. .))
+char:EOF
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN eof-in-cdata) (NN parse) (NN error))) (. .))
+(S (VP (VB Emit) (NP (DT an) (NN end-of-file) (NN token))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+
+name:CDATA_section_bracket_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+005D RIGHT SQUARE BRACKET (])
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN CDATA_section_end_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (DT a) (NNP U+005D) (NN RIGHT) (NNP SQUARE) (NNP BRACKET) (NN character) (NN token))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN CDATA_section_state)))) (. .))
+
+name:CDATA_section_end_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:U+005D RIGHT SQUARE BRACKET (])
+(S (VP (VB Emit) (NP (DT a) (NNP U+005D) (NML (NNP RIGHT) (NNP SQUARE) (NNP BRACKET)) (NN character) (NN token))) (. .))
+char:U+003E GREATER-THAN SIGN character
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Data_state)))) (. .))
+char:Anything else
+(S (VP (VB Emit) (NP (CD two) (NNP U+005D) (NN RIGHT) (NNP SQUARE) (NNP BRACKET) (NN character) (NNS tokens))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN CDATA_section_state)))) (. .))
+
+name:Character_reference_state
+prev:
+(S (VP (VB Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string)))) (. .))
+(S (VP (VB Append) (NP (DT a) (NNP U+0026) (NNP AMPERSAND) (-LRB- -LRB-) (SYM &) (HYPH amp) (-RRB- ;-RRB-) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alphanumeric
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Named_character_reference_state)))) (. .))
+char:U+0023 NUMBER SIGN (#)
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Numeric_character_reference_state)))) (. .))
+char:Anything else
+(NP (NP (NML (NN Flush) (NN code)) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN return) (NN state)))) (. .))
+
+name:Named_character_reference_state
+prev:
+(S (VP (VB Consume) (NP (NP (NP (DT the) (JJ maximum) (NN number)) (PP (IN of) (NP (NNS characters)))) (ADJP (JJ possible))) (, ,) (SBAR (WHADVP (WRB where)) (S (NP (DT the) (VBN consumed) (NNS characters)) (VP (VBP are) (NP (NP (CD one)) (PP (IN of) (NP (NP (DT the) (NNS identifiers)) (PP (IN in) (NP (NP (DT the) (JJ first) (NN column)) (PP (IN of) (NP (DT the) (VBN named) (NN character) (NNS references) (NN table)))))))))))) (. .))
+(S (VP (VB Append) (NP (DT each) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer))) (SBAR (WHADVP (WRB when)) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBN consumed)))))) (. .))
+trans:
+char:If there is a match
+(S (SBAR (IN If) (S (S (NP (DT the) (NN character) (NN reference)) (VP (VBD was) (VP (VBN consumed) (PP (IN as) (NP (NP (NN part)) (PP (IN of) (NP (DT an) (NN attribute)))))))) (, ,) (CC and) (S (S (NP (NP (DT the) (JJ last) (NN character)) (VP (VBN matched))) (VP (VBZ is) (RB not) (NP (DT a) (NNP U+003B) (NNP SEMICOLON) (NN character)) (-LRB- -LRB-) (-LRB- ;-RRB-) (-RRB- ,))) (CC and) (S (NP (DT the) (JJ next) (NN input) (NN character)) (VP (VBZ is) (NP (CC either) (NP (NP (DT a) (NNP U+003D) (NNPS EQUALS) (NNP SIGN) (NN character)) (-LRB- -LRB-) (-RRB- =-RRB-)) (CC or) (NP (DT an) (NNP ASCII) (NN alphanumeric)))))))) (, ,) (ADVP (RB then)) (, ,) (PP (IN for) (NP (JJ historical) (NNS reasons))) (, ,) (VP (VP (VB flush) (NP (NP (NN code) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference)))))) (CC and) (VP (VB switch) (PP (IN to) (NP (DT the) (NN return) (NN state))))) (. .))
+(NP (LS  ))
+(FRAG (ADVP (RB Otherwise)) (: :) (SBAR (IN If) (S (NP (NP (DT the) (JJ last) (NN character)) (VP (VBN matched))) (VP (VBZ is) (RB not) (NP (DT a) (NNP U+003B) (NNP SEMICOLON) (NN character))))) (-LRB- -LRB-) (: ;-RRB-) (-RRB- ,) (ADVP (RB then)) (NP (DT this)) (VP (VBZ is) (NP (DT a) (NN missing-semicolon-after-character-reference) (NN parse) (VB error.Set) (NP (DT the) (JJ temporary) (NN buffer)) (PP (IN to) (NP (DT the) (JJ empty) (NN string))))) (. .))
+(S (VP (VB Append) (NP (NP (NP (QP (CD one) (CC or) (CD two)) (NNS characters)) (VP (VBG corresponding) (PP (IN to) (NP (DT the) (NML (NN character) (NN reference)) (NN name))))) (-LRB- -LRB-) (SBAR (IN as) (S (VP (VBN given) (PP (IN by) (NP (NP (DT the) (JJ second) (NN column)) (PP (IN of) (NP (DT the) (VBN named) (NN character) (NNS references) (NN table)))))))) (-RRB- -RRB-)) (PP (IN to) (NP (NP (DT the) (JJ temporary) (NNP buffer.Flush) (NN code) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference))))))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN return) (NN state)))) (. .))
+char:Otherwise
+(NP (NP (NML (NN Flush) (NN code)) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Ambiguous_ampersand_state)))) (. .))
+
+name:Ambiguous_ampersand_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII alphanumeric
+(S (SBAR (IN If) (S (NP (DT the) (NN character) (NN reference)) (VP (VBD was) (VP (VBN consumed) (PP (IN as) (NP (NP (NN part)) (PP (IN of) (NP (DT an) (NN attribute))))))))) (, ,) (ADVP (RB then)) (VP (VB append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (NP (DT the) (JJ current) (NN attribute) (POS 's)) (NN value)))) (. .))
+(S (ADVP (RB Otherwise)) (, ,) (VP (VB emit) (NP (DT the) (JJ current) (JJ input) (NN character)) (PP (IN as) (NP (DT a) (NN character) (NN token)))) (. .))
+char:U+003B SEMICOLON (;)
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN unknown-named-character-reference) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN return) (NN state)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN return) (NN state)))) (. .))
+
+name:Numeric_character_reference_state
+prev:
+(S (VP (VB Set) (NP (DT the) (NN character) (NN reference) (NN code)) (PP (IN to) (NP (CD zero) (NN -LRB-))) (VP (VB 0-RRB-.Consume) (NP (DT the) (JJ next) (NN input) (NN character)))) (: :))
+trans:
+char:U+0078 LATIN SMALL LETTER X
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Hexadecimal_character_reference_start_state)))) (. .))
+char:U+0058 LATIN CAPITAL LETTER X
+(S (VP (VB Append) (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN to) (NP (DT the) (JJ temporary) (NN buffer)))) (. .))
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Hexadecimal_character_reference_start_state)))) (. .))
+char:Anything else
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Decimal_character_reference_start_state)))) (. .))
+
+name:Hexadecimal_character_reference_start_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII hex digit
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Hexadecimal_character_reference_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN absence-of-digits-in-numeric-character-reference) (NN parse) (NN error))) (. .))
+(NP (NP (NML (NN Flush) (NN code)) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN return) (NN state)))) (. .))
+
+name:Decimal_character_reference_start_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII digit
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Decimal_character_reference_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT an) (NN absence-of-digits-in-numeric-character-reference) (NN parse) (NN error))) (. .))
+(NP (NP (NML (NN Flush) (NN code)) (NNS points)) (VP (VBN consumed) (PP (IN as) (NP (DT a) (NN character) (NN reference)))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN return) (NN state)))) (. .))
+
+name:Hexadecimal_character_reference_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII digit
+(S (VP (VB Multiply) (NP (DT the) (NN character) (NN reference) (NN code)) (PP (IN by) (NP (CD 16)))) (. .))
+(S (VP (VB Add) (NP (NP (NP (DT a) (JJ numeric) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))) (-LRB- -LRB-) (S (VP (VB subtract) (NP (CD 0x0030)) (PP (IN from) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (DT the) (NN character) (NN reference) (NN code)))) (. .))
+char:ASCII upper hex digit
+(S (VP (VB Multiply) (NP (DT the) (NN character) (NN reference) (NN code)) (PP (IN by) (NP (CD 16)))) (. .))
+(S (VP (VB Add) (NP (NP (NP (DT a) (JJ numeric) (NN version)) (PP (IN of) (NP (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (JJ hexadecimal) (NN digit)))))) (PRN (-LRB- -LRB-) (S (VP (VB subtract) (NP (CD 0x0037)) (PP (IN from) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-))) (PP (IN to) (NP (DT the) (NN character) (NN reference) (NN code)))) (. .))
+char:ASCII lower hex digit
+(S (VP (VB Multiply) (NP (DT the) (NN character) (NN reference) (NN code)) (PP (IN by) (NP (CD 16)))) (. .))
+(S (VP (VB Add) (NP (NP (NP (DT a) (JJ numeric) (NN version)) (PP (IN of) (NP (NP (DT the) (JJ current) (NN input) (NN character)) (PP (IN as) (NP (DT a) (JJ hexadecimal) (NN digit)))))) (PRN (-LRB- -LRB-) (S (VP (VB subtract) (NP (CD 0x0057)) (PP (IN from) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-))) (PP (IN to) (NP (DT the) (NN character) (NN reference) (NN code)))) (. .))
+char:U+003B SEMICOLON
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Numeric_character_reference_end_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NML (NN missing-semicolon-after-character-reference)) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Numeric_character_reference_end_state)))) (. .))
+
+name:Decimal_character_reference_state
+prev:
+(S (VP (VB Consume) (NP (DT the) (JJ next) (NN input) (NN character))) (: :))
+trans:
+char:ASCII digit
+(S (VP (VB Multiply) (NP (DT the) (NN character) (NN reference) (NN code)) (PP (IN by) (NP (CD 10)))) (. .))
+(S (VP (VB Add) (NP (NP (NP (DT a) (JJ numeric) (NN version)) (PP (IN of) (NP (DT the) (JJ current) (NN input) (NN character)))) (-LRB- -LRB-) (S (VP (VB subtract) (NP (CD 0x0030)) (PP (IN from) (NP (NP (DT the) (NN character) (POS 's)) (NN code) (NN point))))) (-RRB- -RRB-)) (PP (IN to) (NP (DT the) (NN character) (NN reference) (NN code)))) (. .))
+char:U+003B SEMICOLON
+(S (VP (VB Switch) (PP (IN to) (NP (DT the) (NN Numeric_character_reference_end_state)))) (. .))
+char:Anything else
+(S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NML (NN missing-semicolon-after-character-reference)) (NN parse) (NN error))) (. .))
+(S (VP (VB Reconsume) (PP (IN in) (NP (DT the) (NN Numeric_character_reference_end_state)))) (. .))
+
