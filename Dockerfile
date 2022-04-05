@@ -17,3 +17,5 @@ RUN pip install --upgrade setuptools
 RUN python -m pip install benepar
 RUN python -m pip install coreferee
 RUN python -m pip install spacy-stanza
+RUN python -m pip install Node
+Run python -m pip install anytree
